@@ -15,6 +15,7 @@ This project demonstrates hands-on FinOps practices using Python and Bash script
 
 ## Project Structure
 
+```
 finops-scripting-lab/
 ├── config/
 │ └── required_tags.json # Required tag keys (e.g., CostCenter, Owner)
@@ -27,6 +28,8 @@ finops-scripting-lab/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+
+```
 
 yaml
 Copy
