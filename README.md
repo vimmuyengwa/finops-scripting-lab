@@ -52,21 +52,22 @@ git clone https://github.com/vimmuyengwa/finops-scripting-lab.git
 cd finops-scripting-lab
 ```
 
-2. Set Up Your Environment
+## 2. Set Up Your Environment
 
 Install Python dependencies:
 
-``
+```bash
 pip install -r requirements.txt
 ```
 
 Configure AWS credentials:
+```bash
 aws configure
-
+```
 
 Update the required tags list in config/required_tags.json:
 
-```
+```bash
 {
   "required_tags": ["Owner", "CostCenter", "Environment"]
 }
