@@ -87,6 +87,9 @@ Calculates estimated monthly cost per instance based on 730 hours/month
 Supports multiple instance types and AWS regions (mapped to pricing terms)
 Saves the cost summary to a CSV file for reporting and audits
 
+
+---
+
 ## How to Run
 Tag Compliance Checker
 ```bash
