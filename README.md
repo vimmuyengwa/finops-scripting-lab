@@ -8,8 +8,8 @@ This project demonstrates hands-on FinOps practices using Python and Bash script
 
 - Enforce AWS **tagging compliance** for EC2 resources
 -  Estimate EC2 **monthly costs** using the AWS Pricing API
--  Send cost reports via **Slack or email** (configurable)
--  *(Optional)* Clean up or auto-tag uncompliant resources
+-  Send cost reports via **email** (configurable)
+
 
 ---
 
@@ -30,7 +30,6 @@ finops-scripting-lab/
 └── README.md
 
 ```
-
 
 ---
 
@@ -63,64 +62,55 @@ pip install -r requirements.txt
 
 Configure AWS credentials:
 aws configure
+
+
 Update the required tags list in config/required_tags.json:
 
 ```
-
 {
   "required_tags": ["Owner", "CostCenter", "Environment"]
 }
 ```
 
+### 1. Tagging Compliance Checker (`check_tagging_compliance.py`)
 
-How to Use
+- Scans all EC2 instances in the configured AWS region
+- Reads required tag keys from `config/required_tags.json`
+- Identifies resources that are missing any required tags
+- Outputs a detailed CSV report in the `reports/` directory
 
-Check Tagging Compliance
-```
-python3 scripts/check_tagging_compliance.py
-Outputs: reports/tagging_compliance_<timestamp>.csv
-```
+### 2. EC2 Cost Estimator (estimate_ec2_costs.py)
 
-Estimate EC2 Costs
+Uses the AWS Pricing API to fetch current hourly prices
+Calculates estimated monthly cost per instance based on 730 hours/month
+Supports multiple instance types and AWS regions (mapped to pricing terms)
+Saves the cost summary to a CSV file for reporting and audits
 
-`
-python3 scripts/estimate_ec2_costs.py
-Outputs: reports/ec2_cost_estimate_<timestamp>.csv
-
-Send Report Notification (Optional)
-Option A: Slack
-Edit scripts/notify.sh and add your Slack webhook URL, then run:
-
+## How to Run
+Tag Compliance Checker
 ```bash
-scripts/notify.sh
+python3 scripts/check_tagging_compliance.py
 ```
 
-Option B: Email via Python + Gmail
-Make sure to use an App Password, not your Gmail login
+Generates:
+```bash
+reports/tagging_compliance_<timestamp>.csv
+```
 
+EC2 Cost Estimator
+```bash
+python3 scripts/estimate_ec2_costs.py
+```
+
+Generates:
+```bash
+reports/ec2_cost_estimate_<timestamp>.csv
+```
+
+Email:
+```bash
 python3 scripts/send_email.py
-
-Key Concepts Demonstrated
-
-Python automation with boto3
-
-EC2 pricing via AWS Pricing API
-
-Tag compliance enforcement logic
-
-CSV generation and reporting
-
-Bash scripting for alerting
-
-FinOps and cloud cost governance
-
-Security & Git Best Practices
-
-Do not hard-code secrets (use .env or app passwords)
-
-Add .env, credentials, and reports/ to .gitignore
-
-Use IAM least privilege policies (e.g., pricing:GetProducts, ec2:DescribeInstances)
+```
 
 Author
 Vimbai Muyengwa
