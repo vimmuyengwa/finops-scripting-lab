@@ -34,6 +34,16 @@ finops-scripting-lab/
 
 ---
 
+## Prerequisites:
+
+Install boto3
+
+Configure AWS credentials (aws configure)
+
+Define required tags in a config file
+
+---
+
 ##  Setup Instructions
 
 ### 1. Clone the Repo
